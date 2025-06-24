@@ -58,17 +58,32 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
-//Write your code here
+    try {
+        const documents = await Dealerships.find();
+        res.json(documents);
+      } catch (error) {
+        res.status(500).json({ error: 'Error fetching documents' });
+      }
 });
 
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
-//Write your code here
+    try {
+        const documents = await Dealerships.find({state: req.params.state});
+        res.json(documents);
+      } catch (error) {
+        res.status(500).json({ error: 'Error fetching documents' });
+      }
 });
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
-//Write your code here
+    try {
+        const documents = await Dealerships.find({id: req.params.id});
+        res.json(documents);
+      } catch (error) {
+        res.status(500).json({ error: 'Error fetching documents' });
+      }
 });
 
 //Express route to insert review
@@ -88,6 +103,19 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 		"car_model": data['car_model'],
 		"car_year": data['car_year'],
 	});
+    const dealerships = new Dealerships({
+        "id": data['id'],
+        "city": data['city'],
+        "state": data['state'],
+        "address": data['address'],
+        "zip": data['zip'],
+        "lat": data['lat'],
+        "long": data['long'],
+        "short_name": data['short_name'],
+        "full_name": data['full_name'],
+      
+    });
+
 
   try {
     const savedReview = await review.save();
