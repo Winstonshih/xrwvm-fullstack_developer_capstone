@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+# from django.shortcuts import render
+# from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
-#from django.shortcuts import get_object_or_404, render, redirect
+# from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout
-#from django.contrib import messages
-#from datetime import datetime
+# from django.contrib import messages
+# from datetime import datetime
 from .models import CarMake, CarModel
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
@@ -33,9 +33,11 @@ def login_user(request):
 
             if user is not None:
                 login(request, user)
-                return JsonResponse({"userName": username, "status": "Authenticated"}, status=200)
+                return JsonResponse({"userName": username,
+                                     "status": "Authenticated"}, status=200)
             else:
-                return JsonResponse({"error": "Invalid credentials"}, status=401)
+                return JsonResponse({"error": "Invalid credentials"},
+                                    status=401)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
     else:
@@ -71,7 +73,11 @@ def registration(request):
     # If it is a new user
     if not username_exist:
         # Create user in auth_user table
-        user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,password=password, email=email)
+        user = User.objects.create_user(username=username,
+                                        first_name=first_name,
+                                        last_name=last_name,
+                                        password=password,
+                                        email=email)
         # Login the user and redirect to list page
         login(request, user)
         data = {"userName": username,"status": "Authenticated"}
