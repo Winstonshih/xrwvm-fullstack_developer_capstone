@@ -95,25 +95,25 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 
   const review = new Reviews({
 		"id": new_id,
-		"name": data['name'],
-		"dealership": data['dealership'],
-		"review": data['review'],
-		"purchase": data['purchase'],
-		"purchase_date": data['purchase_date'],
-		"car_make": data['car_make'],
-		"car_model": data['car_model'],
-		"car_year": data['car_year'],
+		"name": data.name,
+		"dealership": data.dealership,
+		"review": data.review,
+		"purchase": data.purchase,
+		"purchase_date": data.purchase_date,
+		"car_make": data.car_make,
+		"car_model": data.car_model,
+		"car_year": data.car_year,
 	});
     const dealerships = new Dealerships({
-        "id": data['id'],
-        "city": data['city'],
-        "state": data['state'],
-        "address": data['address'],
-        "zip": data['zip'],
-        "lat": data['lat'],
-        "long": data['long'],
-        "short_name": data['short_name'],
-        "full_name": data['full_name'],
+        "id": data.id,
+        "city": data.city,
+        "state": data.state,
+        "address": data.address,
+        "zip": data.zip,
+        "lat": data.lat,
+        "long": data.long,
+        "short_name": data.short_name,
+        "full_name": data.'full_name,
       
     });
 
